@@ -1,0 +1,3 @@
+name="IdolTuneVote"
+[build]
+build_class = "builder::MyBuilder"
