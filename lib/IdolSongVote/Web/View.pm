@@ -1,4 +1,4 @@
-package IdolTuneVote::Web::View;
+package IdolSongVote::Web::View;
 use strict;
 use warnings;
 use utf8;
@@ -7,12 +7,12 @@ use File::Spec ();
 
 use File::ShareDir;
 use Text::Xslate 1.6001;
-use IdolTuneVote::Web::ViewFunctions;
+use IdolSongVote::Web::ViewFunctions;
 
 # setup view class
 sub make_instance {
     my ($class, $context) = @_;
-    Carp::croak("Usage: IdolTuneVote::View->make_instance(\$context_class)") if @_!=2;
+    Carp::croak("Usage: IdolSongVote::View->make_instance(\$context_class)") if @_!=2;
 
     my $view_conf = $context->config->{'Text::Xslate'} || +{};
     unless (exists $view_conf->{path}) {
@@ -21,7 +21,7 @@ sub make_instance {
             # tmpl
             $view_conf->{path} = [ $tmpl_path ];
         } else {
-            my $share_tmpl_path = eval { File::Spec->catdir(File::ShareDir::dist_dir('IdolTuneVote'), 'tmpl') };
+            my $share_tmpl_path = eval { File::Spec->catdir(File::ShareDir::dist_dir('IdolSongVote'), 'tmpl') };
             if ($share_tmpl_path) {
                 # This application was installed to system.
                 $view_conf->{path} = [ $share_tmpl_path ];
@@ -34,7 +34,7 @@ sub make_instance {
         'syntax'   => 'Kolon',
         'module'   => [
             'Text::Xslate::Bridge::Star',
-            'IdolTuneVote::Web::ViewFunctions',
+            'IdolSongVote::Web::ViewFunctions',
         ],
         'function' => {
         },

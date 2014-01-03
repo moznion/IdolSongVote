@@ -9,7 +9,7 @@ use parent qw(Module::Build);
 # We need to install 'tmpl' directories to '$DIST_DIR/tmpl'. But M::B doesn't support it.
 sub ACTION_code {
     my $self = shift;
-    my $share_prefix = File::Spec->catdir($self->blib, qw/lib auto share dist/, 'IdolTuneVote');
+    my $share_prefix = File::Spec->catdir($self->blib, qw/lib auto share dist/, 'IdolSongVote');
     for my $dir (qw(tmpl static)) {
         next unless -d $dir;
         for my $src (@{$self->rscan_dir($dir)}) {

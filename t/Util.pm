@@ -40,7 +40,7 @@ sub slurp {
 }
 
 # initialize database
-use IdolTuneVote;
+use IdolSongVote;
 {
     unlink 'db/test.db' if -f 'db/test.db';
     system("sqlite3 db/test.db < sql/sqlite.sql");

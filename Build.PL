@@ -25,8 +25,8 @@ my $build = builder::MyBuilder->new(
     script_files => [glob('script/*'), glob('bin/*')],
 
     no_index    => { 'directory' => [ 'inc' ] },
-    name        => 'IdolTuneVote',
-    module_name => 'IdolTuneVote',
+    name        => 'IdolSongVote',
+    module_name => 'IdolSongVote',
     author        => 'Some Person <person@example.com>',
     dist_abstract => 'A web site based on Amon2',
 

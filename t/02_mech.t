@@ -7,7 +7,7 @@ use Plack::Util;
 use Test::More;
 use Test::Requires 'Test::WWW::Mechanize::PSGI';
 
-my $app = Plack::Util::load_psgi 'script/idoltunevote-server';
+my $app = Plack::Util::load_psgi 'script/idolsongvote-server';
 
 my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
 $mech->get_ok('/');

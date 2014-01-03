@@ -1,4 +1,4 @@
-package IdolTuneVote::DB::Row;
+package IdolSongVote::DB::Row;
 use strict;
 use warnings;
 use utf8;

@@ -1,4 +1,4 @@
-package IdolTuneVote::Web::Plugin::Session;
+package IdolSongVote::Web::Plugin::Session;
 use strict;
 use warnings;
 use utf8;
@@ -57,5 +57,5 @@ __END__
 
 =head1 DESCRIPTION
 
-This module manages session for IdolTuneVote.
+This module manages session for IdolSongVote.
 

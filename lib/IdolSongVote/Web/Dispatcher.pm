@@ -1,4 +1,4 @@
-package IdolTuneVote::Web::Dispatcher;
+package IdolSongVote::Web::Dispatcher;
 use strict;
 use warnings;
 use utf8;

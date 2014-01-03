@@ -1,4 +1,4 @@
-package IdolTuneVote::Web::ViewFunctions;
+package IdolSongVote::Web::ViewFunctions;
 use strict;
 use warnings;
 use utf8;
@@ -14,15 +14,15 @@ sub commify {
     return $_;
 }
 
-sub c { IdolTuneVote->context() }
-sub uri_with { IdolTuneVote->context()->req->uri_with(@_) }
-sub uri_for { IdolTuneVote->context()->uri_for(@_) }
+sub c { IdolSongVote->context() }
+sub uri_with { IdolSongVote->context()->req->uri_with(@_) }
+sub uri_for { IdolSongVote->context()->uri_for(@_) }
 
 {
     my %static_file_cache;
     sub static_file {
         my $fname = shift;
-        my $c = IdolTuneVote->context;
+        my $c = IdolSongVote->context;
         if (not exists $static_file_cache{$fname}) {
             my $fullpath = File::Spec->catfile($c->base_dir(), $fname);
             $static_file_cache{$fname} = (stat $fullpath)[9];

@@ -3,13 +3,13 @@ use warnings;
 use Test::More;
 
 
-use IdolTuneVote;
-use IdolTuneVote::Web;
-use IdolTuneVote::Web::View;
-use IdolTuneVote::Web::ViewFunctions;
+use IdolSongVote;
+use IdolSongVote::Web;
+use IdolSongVote::Web::View;
+use IdolSongVote::Web::ViewFunctions;
 
-use IdolTuneVote::DB::Schema;
-use IdolTuneVote::Web::Dispatcher;
+use IdolSongVote::DB::Schema;
+use IdolSongVote::Web::Dispatcher;
 
 
 pass "All modules can load.";

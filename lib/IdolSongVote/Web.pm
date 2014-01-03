@@ -1,30 +1,30 @@
-package IdolTuneVote::Web;
+package IdolSongVote::Web;
 use strict;
 use warnings;
 use utf8;
-use parent qw/IdolTuneVote Amon2::Web/;
+use parent qw/IdolSongVote Amon2::Web/;
 use File::Spec;
 
 # dispatcher
-use IdolTuneVote::Web::Dispatcher;
+use IdolSongVote::Web::Dispatcher;
 sub dispatch {
-    return (IdolTuneVote::Web::Dispatcher->dispatch($_[0]) or die "response is not generated");
+    return (IdolSongVote::Web::Dispatcher->dispatch($_[0]) or die "response is not generated");
 }
 
 # load plugins
 __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
     'Web::JSON',
-    '+IdolTuneVote::Web::Plugin::Session',
+    '+IdolSongVote::Web::Plugin::Session',
 );
 
 # setup view
-use IdolTuneVote::Web::View;
+use IdolSongVote::Web::View;
 {
     sub create_view {
-        my $view = IdolTuneVote::Web::View->make_instance(__PACKAGE__);
+        my $view = IdolSongVote::Web::View->make_instance(__PACKAGE__);
         no warnings 'redefine';
-        *IdolTuneVote::Web::create_view = sub { $view }; # Class cache.
+        *IdolSongVote::Web::create_view = sub { $view }; # Class cache.
         $view
     }
 }
