@@ -8,4 +8,40 @@ __PACKAGE__->load_plugin('Count');
 __PACKAGE__->load_plugin('Replace');
 __PACKAGE__->load_plugin('Pager');
 
+use constant GOJUON_MAP => +{
+    a  => ['あ', 'い', 'う', 'え', 'お'],
+    ka => ['か', 'き', 'く', 'け', 'こ'],
+    sa => ['さ', 'し', 'す', 'せ', 'そ'],
+    ta => ['た', 'ち', 'つ', 'て', 'と'],
+    na => ['な', 'に', 'ぬ', 'ね', 'の'],
+    ha => ['は', 'ひ', 'ふ', 'へ', 'ほ'],
+    ma => ['ま', 'み', 'む', 'め', 'も'],
+    ya => ['や', 'ゆ', 'よ'],
+    ra => ['ら', 'り', 'る', 'れ', 'ろ'],
+    wa => ['わ', 'を', 'ん'],
+};
+
+sub fetch_songs_by_first_char {
+    my ($self, $first_char) = @_;
+
+    my $search_query;
+    if ($first_char =~ /^\w-\w$/) { # For `a-m`, `n-z` and `0-9`
+        my ($begin, $end) = split /-/, $first_char;
+        for my $char ($begin..$end) {
+            push @$search_query, $char;
+        }
+    }
+    else {
+        $search_query = GOJUON_MAP->{$first_char};
+    }
+
+    my $songs = $self->search(
+        'songs',
+        {first_char => $search_query},
+        {order_by => 'id'},
+    );
+
+    return $songs;
+}
+
 1;

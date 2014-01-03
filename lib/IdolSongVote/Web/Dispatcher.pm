@@ -6,18 +6,18 @@ use Amon2::Web::Dispatcher::RouterBoom;
 
 any '/' => sub {
     my ($c) = @_;
-    my $counter = $c->session->get('counter') || 0;
-    $counter++;
-    $c->session->set('counter' => $counter);
-    return $c->render('index.tx', {
-        counter => $counter,
-    });
+    return $c->render('index.tx', {});
 };
 
 get '/songs' => sub {
 };
 
 get '/songs/:index' => sub {
+    my ($c, $args) = @_;
+    my $index = $args->{index};
+    my $songs = $c->db->fetch_songs_by_first_char($index);
+
+    return $c->render('songs.tx', {songs => $songs});
 };
 
 get '/vote' => sub {

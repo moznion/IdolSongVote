@@ -1,0 +1,13 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<h3>曲</h3>
+
+<ul>
+: while $songs.next -> $song {
+  <li><a href="/vote?id=<: $song['id'] :>"><: $song['title'] :></a></li>
+: }
+</ul>
+
+: }
