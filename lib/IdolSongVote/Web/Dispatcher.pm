@@ -14,16 +14,16 @@ any '/' => sub {
     });
 };
 
-post '/reset_counter' => sub {
-    my $c = shift;
-    $c->session->remove('counter');
-    return $c->redirect('/');
+get '/songs' => sub {
 };
 
-post '/account/logout' => sub {
-    my ($c) = @_;
-    $c->session->expire();
-    return $c->redirect('/');
+get '/songs/:index' => sub {
+};
+
+get '/vote' => sub {
+};
+
+post '/vote' => sub {
 };
 
 1;
