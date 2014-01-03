@@ -2,7 +2,7 @@
 
 : override content -> {
 
-<h3>曲</h3>
+<h3>曲一覧</h3>
 
 <ul>
 : while $songs.next -> $song {

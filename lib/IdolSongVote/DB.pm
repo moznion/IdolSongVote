@@ -44,4 +44,16 @@ sub fetch_songs_by_first_char {
     return $songs;
 }
 
+sub fetch_songs_by_search_word {
+    my ($self, $word) = @_;
+
+    my $songs = $self->search(
+        'songs',
+        ['title' => {'like' => "%$word%"}],
+        {order_by => 'id'},
+    );
+
+    return $songs;
+}
+
 1;
