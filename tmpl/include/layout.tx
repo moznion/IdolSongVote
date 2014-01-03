@@ -28,14 +28,9 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">IdolSongVote</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                </ul>
             </div><!-- /.navbar-inner -->
         </div><!-- /.container -->
     </div><!-- /.navbar -->
