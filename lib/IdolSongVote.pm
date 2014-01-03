@@ -30,6 +30,11 @@ sub db {
     $c->{db};
 }
 
+sub res_400 {
+    my $c = shift;
+    return $c->create_simple_status_page(400, 'Bad Request');
+}
+
 1;
 __END__
 

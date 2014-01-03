@@ -30,9 +30,35 @@ get '/songs/:index' => sub {
 };
 
 get '/vote' => sub {
+    my ($c) = @_;
+
+    my $song_id = $c->req->param('song_id');
+    return $c->res_400 unless $song_id;
+
+    my $song = $c->db->fetch_song_by_id($song_id);
+    return $c->res_400 unless $song;
+
+    return $c->render('vote.tx', {
+        song_id => $song_id,
+        song => $song,
+    });
 };
 
 post '/vote' => sub {
+    my ($c) = @_;
+
+    my $song_id = $c->req->param('song_id');
+    my $serial_number = $c->req->param('serial_number');
+    return $c->res_400 if !$song_id || !$serial_number;
+
+    if (!$c->db->is_available_serial_number($serial_number)) {
+        return $c->res_400;
+    }
+
+    $c->db->vote_song($song_id);
+    $c->db->mark_serial_number_as_used($serial_number);
+
+    $c->redirect('/');
 };
 
 1;

@@ -6,7 +6,7 @@
 
 <ul>
 : while $songs.next -> $song {
-  <li><a href="/vote?id=<: $song['id'] :>"><: $song['title'] :></a></li>
+  <li><a href="/vote?song_id=<: $song['id'] :>"><: $song['title'] :></a></li>
 : }
 </ul>
 
