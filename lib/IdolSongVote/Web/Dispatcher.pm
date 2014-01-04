@@ -6,7 +6,11 @@ use Amon2::Web::Dispatcher::RouterBoom;
 
 any '/' => sub {
     my ($c) = @_;
-    return $c->render('index.tx', {});
+
+    return $c->render('index.tx', {
+        flash_success => $c->req->param('flash-success') || '',
+        flash_error   => $c->req->param('flash-error') || '',
+    });
 };
 
 get '/songs' => sub {
@@ -64,7 +68,7 @@ post '/vote' => sub {
     $serial_number_row->mark_as_used;
     $txn->commit();
 
-    $c->redirect('/');
+    $c->redirect('/', {'flash-success' => '投票しました'});
 };
 
 1;
