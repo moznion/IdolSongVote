@@ -2,6 +2,8 @@
 
 : override content -> {
 
+<script src="<: uri_for('/static/js/flash_message.js') :>"></script>
+
 : if $flash_success {
 <div class='flash-success'>✓ <: $flash_success :></div>
 : }
@@ -39,23 +41,6 @@
 </form>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    setTimeout(function(){
-      var $flashSuccess = $(".flash-success");
-      if ($flashSuccess) {
-        $flashSuccess.fadeOut("slow", function () {
-          $flashSuccess.remove();
-        });
-      }
-      var $flashError = $(".flash-error");
-      if ($flashError) {
-        $flashError.fadeOut("slow", function () {
-          $flashError.remove();
-        });
-      }
-    }, 2000);
-  });
-
   $("#search_first_char").click(function(){
     location.href = "/songs/" + $("#first_char").val();
   });
