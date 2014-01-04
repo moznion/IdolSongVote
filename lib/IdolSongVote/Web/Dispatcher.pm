@@ -7,9 +7,12 @@ use Amon2::Web::Dispatcher::RouterBoom;
 any '/' => sub {
     my ($c) = @_;
 
-    return $c->render('index.tx', {
-        flash_success => $c->req->param('flash-success') || '',
-        flash_error   => $c->req->param('flash-error') || '',
+    my $flash_success = $c->flash('flash_success') || '';
+    my $flash_error   = $c->flash('flash_error')   || '';
+
+    $c->render('index.tx', {
+        flash_success => $flash_success,
+        flash_error   => $flash_error,
     });
 };
 
@@ -68,7 +71,8 @@ post '/vote' => sub {
     $serial_number_row->mark_as_used;
     $txn->commit();
 
-    $c->redirect('/', {'flash-success' => '投票しました'});
+    $c->flash('flash_success', '投票しました');
+    $c->redirect('/');
 };
 
 1;

@@ -16,6 +16,7 @@ __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
     'Web::JSON',
     '+IdolSongVote::Web::Plugin::Session',
+    '+IdolSongVote::Web::Plugin::FlashMessage',
 );
 
 # setup view
