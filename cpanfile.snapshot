@@ -435,6 +435,26 @@ DISTRIBUTIONS
       Module::Build 0.38
       Module::Load 0
       perl 5.008001
+  DBIx-Sunny-0.21
+    pathname: K/KA/KAZEBURO/DBIx-Sunny-0.21.tar.gz
+    provides:
+      DBIx::Sunny 0.21
+      DBIx::Sunny::Schema undef
+    requirements:
+      Capture::Tiny 0
+      Class::Accessor::Lite 0.05
+      Class::Data::Inheritable 0
+      DBD::SQLite 1.31
+      DBI 1.615
+      DBIx::TransactionManager 0
+      Data::Validator 0
+      Module::Build 0.38
+      Scalar::Util 0
+      Test::More 0.98
+      Test::Requires 0
+      Test::TCP 0
+      parent 0
+      perl 5.008005
   DBIx-TransactionManager-1.12
     pathname: N/NE/NEKOKAK/DBIx-TransactionManager-1.12.tar.gz
     provides:
@@ -486,6 +506,25 @@ DISTRIBUTIONS
       Class::Accessor::Lite 0.05
       ExtUtils::MakeMaker 6.42
       Test::More 0.96
+      perl 5.008001
+  Data-Validator-1.04
+    pathname: G/GF/GFUJI/Data-Validator-1.04.tar.gz
+    provides:
+      Data::Validator 1.04
+      Data::Validator::Role::AllowExtra undef
+      Data::Validator::Role::Croak undef
+      Data::Validator::Role::Method undef
+      Data::Validator::Role::NoRestricted undef
+      Data::Validator::Role::NoThrow undef
+      Data::Validator::Role::Sequenced undef
+      Data::Validator::Role::StrictSequenced undef
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
+      ExtUtils::MakeMaker 6.59
+      Module::Build 0.38
+      Mouse 0.93
       perl 5.008001
   Devel-CheckCompiler-0.05
     pathname: S/SY/SYOHEX/Devel-CheckCompiler-0.05.tar.gz

@@ -3,7 +3,7 @@ requires 'Capture::Tiny', '0.23';
 requires 'Crypt::Blowfish', '2.14';
 requires 'DBD::mysql', '4.025';
 requires 'DBD::SQLite', '1.33';
-requires 'DBI', '1.630';
+requires 'DBIx::Sunny', '0.21';
 requires 'File::ShareDir', '1.03';
 requires 'Getopt::Long', '2.42';
 requires 'HTML::FillInForm::Lite', '1.11';

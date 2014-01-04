@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use utf8;
-use DBI;
+use DBIx::Sunny;
 use DBD::mysql;
 use SQL::Maker;
 use FindBin;
@@ -21,14 +21,18 @@ unless ($opts{ENV} =~ /^(?:development|production|test)$/) {
     die "$opts{ENV}: Environment does not exist";
 }
 my $db_config = do "$FindBin::Bin/../../config/$opts{ENV}.pl";
-my $dbh = DBI->connect(@{$db_config->{DBI}});
+my $dbh = DBIx::Sunny->connect(@{$db_config->{DBI}});
 
 my $table = 'songs';
 my $builder = SQL::Maker->new(driver => 'mysql');
 
-my $songs = capture_stdout {
-    system("phantomjs $FindBin::Bin/scrape_songs_data.js");
-};
+my $songs = '';
+open my $fh, '<', "$FindBin::Bin/songs.ltsv" or
+    die "Please execue `phantomjs scrape_songs_data.js > songs.ltsv`";
+while (my $line = <$fh>) {
+    $songs .= $line;
+}
+close $fh;
 
 my $i = 0;
 for my $song (split /\n/, $songs) {
@@ -46,9 +50,10 @@ for my $song (split /\n/, $songs) {
         },
     );
 
-    my $sth = $dbh->prepare($sql);
-    my $insert_result = $sth->execute(@binds);
-    if ($insert_result) {
+    eval {
+        $dbh->query($sql, @binds);
+    };
+    unless ($@) {
         $i++;
     }
 }
