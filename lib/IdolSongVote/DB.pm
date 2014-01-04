@@ -58,7 +58,8 @@ sub fetch_songs_by_search_word {
 
 sub fetch_song_by_id {
     my ($self, $id) = @_;
-    $self->single(
+
+    return $self->single(
         'songs',
         {'id' => $id},
     );

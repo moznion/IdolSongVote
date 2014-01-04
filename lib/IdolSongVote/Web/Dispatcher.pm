@@ -59,8 +59,10 @@ post '/vote' => sub {
         return $c->res_400;
     }
 
+    my $txn = $c->db->txn_scope;
     $song->vote;
     $serial_number_row->mark_as_used;
+    $txn->commit();
 
     $c->redirect('/');
 };
