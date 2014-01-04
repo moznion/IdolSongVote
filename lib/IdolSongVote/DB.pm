@@ -64,36 +64,12 @@ sub fetch_song_by_id {
     );
 }
 
-sub vote_song {
-    my ($self, $id) = @_;
-
-    my $song = $self->single('songs', {id => $id});
-    $song->polled($song->polled + 1);
-    $song->update;
-}
-
-sub is_available_serial_number {
+sub fetch_serial_number {
     my ($self, $serial_number) = @_;
 
-    my $item = $self->single(
+    return $self->single(
         'serial_numbers',
         {'serial_number' => $serial_number},
-    );
-
-    if (!$item || $item->is_used) {
-        return 0;
-    }
-
-    return 1;
-}
-
-sub mark_serial_number_as_used {
-    my ($self, $serial_number) = @_;
-
-    $self->update(
-        'serial_numbers',
-        {is_used => 1},
-        {serial_number => $serial_number},
     );
 }
 

@@ -51,12 +51,16 @@ post '/vote' => sub {
     my $serial_number = $c->req->param('serial_number');
     return $c->res_400 if !$song_id || !$serial_number;
 
-    if (!$c->db->is_available_serial_number($serial_number)) {
+    my $song = $c->db->fetch_song_by_id($song_id);
+    return $c->res_400 if !$song;
+
+    my $serial_number_row = $c->db->fetch_serial_number($serial_number);
+    if (!$serial_number_row || !$serial_number_row->is_available) {
         return $c->res_400;
     }
 
-    $c->db->vote_song($song_id);
-    $c->db->mark_serial_number_as_used($serial_number);
+    $song->vote;
+    $serial_number_row->mark_as_used;
 
     $c->redirect('/');
 };
