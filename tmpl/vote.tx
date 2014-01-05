@@ -2,7 +2,7 @@
 
 : override content -> {
 
-<h3>投票する曲: <: $song['title'] :></h4>
+<h3>投票する曲: <: $song['title'] :></h3>
 
 <form action="/vote" method="post">
   <p>
