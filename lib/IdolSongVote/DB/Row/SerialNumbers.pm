@@ -3,12 +3,13 @@ use strict;
 use warnings;
 use utf8;
 use parent qw(Teng::Row);
+use IdolSongVote::Exception::InvalidSerialNumberException;
 
-sub is_available {
+sub check_availability {
     my ($self) = @_;
 
     if ($self->is_used) {
-        return 0;
+        die IdolSongVote::Exception::InvalidSerialNumberException->new;
     }
 
     return 1;

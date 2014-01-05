@@ -19,6 +19,7 @@ requires 'Teng', '0.18';
 requires 'Test::WWW::Mechanize::PSGI';
 requires 'Text::Xslate', '2.0009';
 requires 'Time::Piece', '1.20';
+requires 'Try::Lite', '0.0.3';
 requires 'URI::Escape', '3.31';
 requires 'perl', '5.010_001';
 requires 'parent';

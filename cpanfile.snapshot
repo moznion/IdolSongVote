@@ -2770,6 +2770,16 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Try-Lite-0.0.3
+    pathname: Y/YA/YAPPO/Try-Lite-0.0.3.tar.gz
+    provides:
+      Try::Lite 0.000003
+    requirements:
+      Exporter 0
+      Module::Build::Tiny 0.020
+      Scalar::Util 0
+      parent 0
+      perl 5.008005
   Try-Tiny-0.18
     pathname: D/DO/DOY/Try-Tiny-0.18.tar.gz
     provides:

@@ -3,10 +3,8 @@ use strict;
 use warnings;
 use utf8;
 use parent qw(Teng);
-
-__PACKAGE__->load_plugin('Count');
-__PACKAGE__->load_plugin('Replace');
-__PACKAGE__->load_plugin('Pager');
+use IdolSongVote::Exception::SongNotExistException;
+use IdolSongVote::Exception::InvalidSerialNumberException;
 
 use constant GOJUON_MAP => +{
     a  => ['あ', 'い', 'う', 'え', 'お'],
@@ -33,6 +31,10 @@ sub fetch_songs_by_first_char {
     }
     else {
         $search_query = GOJUON_MAP->{$first_char};
+    }
+
+    unless ($search_query) {
+        die IdolSongVote::Exception::SongNotExistException->new;
     }
 
     my $songs = $self->search(
@@ -62,7 +64,7 @@ sub fetch_song_by_id {
     return $self->single(
         'songs',
         {'id' => $id},
-    );
+    ) || die IdolSongVote::Exception::SongNotExistException->new;
 }
 
 sub fetch_serial_number {
@@ -71,7 +73,7 @@ sub fetch_serial_number {
     return $self->single(
         'serial_numbers',
         {'serial_number' => $serial_number},
-    );
+    ) || die IdolSongVote::Exception::InvalidSerialNumberException->new;
 }
 
 1;
