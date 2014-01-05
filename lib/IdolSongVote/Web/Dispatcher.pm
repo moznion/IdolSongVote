@@ -7,12 +7,9 @@ use Amon2::Web::Dispatcher::RouterBoom;
 any '/' => sub {
     my ($c) = @_;
 
-    my $flash_success = $c->flash('flash_success') || '';
-    my $flash_error   = $c->flash('flash_error')   || '';
-
     $c->render('index.tx', {
-        flash_success => $flash_success,
-        flash_error   => $flash_error,
+        flash_success => $c->flash('flash_success') || '',
+        flash_error   => $c->flash('flash_error')   || '',
     });
 };
 
@@ -46,8 +43,9 @@ get '/vote' => sub {
     return $c->res_400 unless $song;
 
     return $c->render('vote.tx', {
-        song_id => $song_id,
-        song => $song,
+        song_id     => $song_id,
+        song        => $song,
+        flash_error => $c->flash('flash_error') || '',
     });
 };
 
@@ -55,15 +53,16 @@ post '/vote' => sub {
     my ($c) = @_;
 
     my $song_id = $c->req->param('song_id');
-    my $serial_number = $c->req->param('serial_number');
-    return $c->res_400 if !$song_id || !$serial_number;
+    return $c->res_400 if !$song_id;
 
     my $song = $c->db->fetch_song_by_id($song_id);
     return $c->res_400 if !$song;
 
+    my $serial_number     = $c->req->param('serial_number');
     my $serial_number_row = $c->db->fetch_serial_number($serial_number);
     if (!$serial_number_row || !$serial_number_row->is_available) {
-        return $c->res_400;
+        $c->flash('flash_error', '不正なシリアルナンバーです');
+        return $c->redirect('/vote', +{song_id => $song_id});
     }
 
     my $txn = $c->db->txn_scope;

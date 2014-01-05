@@ -2,6 +2,12 @@
 
 : override content -> {
 
+<script src="<: uri_for('/static/js/flash_message.js') :>"></script>
+
+: if $flash_error {
+<div class='flash-error'>✗ <: $flash_error :></div>
+: }
+
 <h3>投票する曲: <: $song['title'] :></h3>
 <h3>投票数: <: $song['polled'] :></h3>
 
