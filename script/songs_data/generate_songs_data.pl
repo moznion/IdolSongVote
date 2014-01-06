@@ -27,8 +27,8 @@ my $table = 'songs';
 my $builder = SQL::Maker->new(driver => 'mysql');
 
 my $songs = '';
-open my $fh, '<', "$FindBin::Bin/songs.ltsv" or
-    die "Please execue `phantomjs scrape_songs_data.js > songs.ltsv`";
+open my $fh, '<', "$FindBin::Bin/songs.tsv" or
+    die "Please execue `phantomjs scrape_songs_data.js > songs.tsv`";
 while (my $line = <$fh>) {
     $songs .= $line;
 }
