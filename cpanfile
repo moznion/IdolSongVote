@@ -1,5 +1,6 @@
 requires 'Amon2', '6.00';
 requires 'Capture::Tiny', '0.23';
+requires 'Class::Accessor::Lite', '0.05';
 requires 'Crypt::Blowfish', '2.14';
 requires 'DBD::mysql', '4.025';
 requires 'DBD::SQLite', '1.33';

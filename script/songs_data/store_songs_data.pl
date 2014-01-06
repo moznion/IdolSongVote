@@ -6,4 +6,4 @@ use utf8;
 use IdolSongVote;
 
 my $c = IdolSongVote->new;
-$c->batch('DispenseSerialNumbers')->run(@ARGV);
+$c->batch('StoreSongsData')->run(@ARGV);

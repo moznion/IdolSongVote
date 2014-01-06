@@ -4,6 +4,7 @@ use warnings;
 use utf8;
 our $VERSION='0.01';
 use 5.008001;
+use Module::Load;
 use IdolSongVote::DB::Schema;
 use IdolSongVote::DB;
 
@@ -33,6 +34,21 @@ sub db {
 sub res_400 {
     my $c = shift;
     return $c->create_simple_status_page(400, 'Bad Request');
+}
+
+sub batch {
+    my ($self, $name) = @_;
+    $self->_load_component('Batch', $name);
+}
+
+sub _load_component {
+    my ($self, $base, $name) = @_;
+
+    $self->{"$base#$name"} //= do {
+        my $klass = "IdolSongVote::${base}::$name";
+        Module::Load::load($klass);
+        $klass->new(c => $self);
+    };
 }
 
 1;

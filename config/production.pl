@@ -9,4 +9,5 @@ my $dbpath = File::Spec->catfile($basedir, 'db', 'production.db');
             sqlite_unicode => 1,
         }
     ],
+    'serial_number_gen_key' => 'dankogai',
 };
