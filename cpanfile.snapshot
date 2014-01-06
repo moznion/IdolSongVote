@@ -902,6 +902,15 @@ DISTRIBUTIONS
       HTML::Tagset 3
       XSLoader 0
       perl 5.008
+  HTML-Selector-XPath-0.16
+    pathname: C/CO/CORION/HTML-Selector-XPath-0.16.tar.gz
+    provides:
+      HTML::Selector::XPath 0.16
+    requirements:
+      ExtUtils::MakeMaker 6.59
+      Test::Base 0
+      Test::More 0
+      perl 5.008001
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
     provides:
@@ -931,6 +940,20 @@ DISTRIBUTIONS
       base 0
       integer 0
       perl 5.008
+  HTML-TreeBuilder-XPath-0.14
+    pathname: M/MI/MIROD/HTML-TreeBuilder-XPath-0.14.tar.gz
+    provides:
+      HTML::Element 0.14
+      HTML::TreeBuilder::XPath 0.14
+      HTML::TreeBuilder::XPath::Attribute 0.14
+      HTML::TreeBuilder::XPath::Node 0.14
+      HTML::TreeBuilder::XPath::Root 0.14
+      HTML::TreeBuilder::XPath::TextNode 0.14
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTML::TreeBuilder 0
+      List::Util 0
+      XML::XPathEngine 0.12
   HTTP-Body-1.19
     pathname: G/GE/GETTY/HTTP-Body-1.19.tar.gz
     provides:
@@ -1290,6 +1313,13 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
+  Module-Load-0.28
+    pathname: B/BI/BINGOS/Module-Load-0.28.tar.gz
+    provides:
+      Module::Load 0.28
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0.94
   Module-Runtime-0.013
     pathname: Z/ZE/ZEFRAM/Module-Runtime-0.013.tar.gz
     provides:
@@ -2275,6 +2305,14 @@ DISTRIBUTIONS
       Scope::Guard 0
       Test::TCP 2.00
       perl 5.008
+  Spiffy-0.31
+    pathname: I/IN/INGY/Spiffy-0.31.tar.gz
+    provides:
+      Spiffy 0.31
+      Spiffy::mixin undef
+    requirements:
+      ExtUtils::MakeMaker 6.59
+      perl 5.006001
   Starlet-0.21
     pathname: K/KA/KAZUHO/Starlet-0.21.tar.gz
     provides:
@@ -2408,6 +2446,20 @@ DISTRIBUTIONS
       Test::Requires 0
       Test::SharedFork 0.15
       parent 0
+  Test-Base-0.60
+    pathname: I/IN/INGY/Test-Base-0.60.tar.gz
+    provides:
+      Module::Install::TestBase 0.60
+      Test::Base 0.60
+      Test::Base::Block 0.60
+      Test::Base::Filter undef
+      Test::Base::Handle 0.60
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Filter::Util::Call 0
+      Spiffy 0.30
+      Test::More 0.62
+      perl 5.006001
   Test-Deep-0.112
     pathname: R/RJ/RJBS/Test-Deep-0.112.tar.gz
     provides:
@@ -2719,6 +2771,18 @@ DISTRIBUTIONS
       Test::More 0
       Tree::DAG_Node 1.02
       perl 5.006
+  Test-mysqld-0.17
+    pathname: K/KA/KAZUHO/Test-mysqld-0.17.tar.gz
+    provides:
+      Test::mysqld 0.17
+    requirements:
+      Class::Accessor::Lite 0
+      DBD::mysql 0
+      DBI 0
+      ExtUtils::MakeMaker 6.42
+      File::Copy::Recursive 0
+      Test::SharedFork 0.06
+      perl 5.008
   Text-Xslate-3.1.0
     pathname: G/GF/GFUJI/Text-Xslate-3.1.0.tar.gz
     provides:
@@ -2896,6 +2960,40 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  Web-Query-0.24
+    pathname: C/CA/CAFEGRATZ/Web-Query-0.24.tar.gz
+    provides:
+      Web::Query 0.24
+      Web::Query::LibXML 0.24
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
+      HTML::Entities 0
+      HTML::Selector::XPath 0.06
+      HTML::TreeBuilder::XPath 0.12
+      LWP::UserAgent 6
+      Module::Build 0.38
+      Scalar::Util 0
+      parent 0
+      perl 5.008005
+  XML-XPathEngine-0.14
+    pathname: M/MI/MIROD/XML-XPathEngine-0.14.tar.gz
+    provides:
+      XML::XPathEngine 0.14
+      XML::XPathEngine::Boolean undef
+      XML::XPathEngine::Expr undef
+      XML::XPathEngine::Function undef
+      XML::XPathEngine::Literal undef
+      XML::XPathEngine::LocationPath undef
+      XML::XPathEngine::NodeSet undef
+      XML::XPathEngine::Number undef
+      XML::XPathEngine::Root undef
+      XML::XPathEngine::Step undef
+      XML::XPathEngine::Variable undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   libwww-perl-6.05
     pathname: G/GA/GAAS/libwww-perl-6.05.tar.gz
     provides:

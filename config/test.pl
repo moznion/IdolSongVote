@@ -1,6 +1,6 @@
 +{
     'DBI' => [
-        "dbi:mysql:TestIdolSongVote", 'root', '',
+        $ENV{TEST_DSN}, 'root', '',
         +{
             'mysql_enable_utf8' => 1,
         }

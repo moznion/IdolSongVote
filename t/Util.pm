@@ -12,10 +12,10 @@ use File::Basename;
 use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'lib'));
 use parent qw/Exporter/;
 use Test::More 0.98;
+use Test::mysqld;
 
 our @EXPORT = qw(
     slurp
-
 );
 
 {
@@ -39,12 +39,36 @@ sub slurp {
     scalar do { local $/; <$fh> };
 }
 
+my $MYSQLD;
+
 # initialize database
 use IdolSongVote;
 {
     unlink 'db/test.db' if -f 'db/test.db';
     system("sqlite3 db/test.db < sql/sqlite.sql");
+
+    unless ($ENV{TEST_DSN}) {
+        $MYSQLD = Test::mysqld->new(
+            my_cnf => {
+                'skip-networking' =>'',
+            }
+        ) or die $Test::mysqld::errstr;
+        $ENV{TEST_DSN} = $MYSQLD->dsn;
+
+        my $dbh = DBI->connect( $ENV{TEST_DSN} );
+
+        my $sql = File::Spec->rel2abs("sql/mysql.sql");
+        open my $fh, '<', $sql or plan skip_all => "Can't open schema file $sql.";
+        my $lines = '';
+        for my $line (<$fh>) {
+            $lines .= $line;
+        }
+        for my $query (split /;\n/, $lines) {
+            $dbh->do($query);
+        }
+    }
 }
 
+END { undef $MYSQLD }
 
 1;

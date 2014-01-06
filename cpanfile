@@ -12,6 +12,7 @@ requires 'HTTP::Session2', '0.04';
 requires 'JSON', '2.50';
 requires 'Module::Build', '0.4203';
 requires 'Module::Functions', '2';
+requires 'Module::Load', '0.28';
 requires 'Plack::Middleware::ReverseProxy', '0.09';
 requires 'Router::Boom', '0.06';
 requires 'Starlet', '0.20';
@@ -33,6 +34,8 @@ on configure => sub {
 on test => sub {
     requires 'Test::More', '0.98';
     requires 'Test::Requires', '0.07';
+    requires 'Test::mysqld', '0.17';
+    requires 'Web::Query', '0.24';
 };
 
 on develop => sub {
