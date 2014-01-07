@@ -19,7 +19,7 @@ requires 'Starlet', '0.20';
 requires 'SQL::Maker', '1.12';
 requires 'Teng', '0.18';
 requires 'Test::WWW::Mechanize::PSGI';
-requires 'Text::Xslate', '2.0009';
+requires 'Text::Xslate', '3.1.0';
 requires 'Time::Piece', '1.20';
 requires 'Try::Lite', '0.0.3';
 requires 'URI::Escape', '3.31';
