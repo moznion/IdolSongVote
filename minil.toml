@@ -1,3 +1,0 @@
-name="IdolSongVote"
-[build]
-build_class = "builder::MyBuilder"
