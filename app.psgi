@@ -1,17 +1,14 @@
 use strict;
 use warnings;
 
+use FindBin;
 use Plack::Builder;
 use Plack::App::CGIBin;
 
-# my $cgibin =
-# my $static =
-
+my $app = Plack::App::CGIBin->new(root => "$FindBin::Bin/cgi-bin")->to_app;
 builder {
-    enable 'ReverseProxy';
-    mount  '/'        => Plack::App::File->new(root => "static")->to_app;
-    mount  '/cgi-bin' => Plack::App::CGIBin->new(
-        root    => 'cgi-bin',
-        exec_cb => sub { my $file = shift; $file =~ m!\.cgi$! and -x $file },
-    )->to_app;
+    enable "Static",
+      path => qr{^/(?:js|css|bootstrap)/},
+      root => './static/';
+    mount '/cgi-bin' => $app,
 }
