@@ -4,8 +4,8 @@ use warnings;
 use Plack::Builder;
 use Plack::App::CGIBin;
 
-my $cgibin = 
-my $static = 
+# my $cgibin =
+# my $static =
 
 builder {
     enable 'ReverseProxy';
