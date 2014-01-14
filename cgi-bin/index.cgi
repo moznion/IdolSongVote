@@ -1,9 +1,9 @@
 #!/usr/bin/env carton exec -- perl
 use strict;
 use warnings;
-use CGI;
+use utf8;
+use Text::Xslate;
+use Encode;
 
-my $q = CGI->new;
-
-print join "\r\n", 'Content-Type: text/html;charset=utf-8', 'Content-Length: 4', '', '';
-print "YAY\n";
+print "Content-type: text/html \n\n";
+print encode_utf8(Text::Xslate->new->render("tmpl/index.tx", {}));
