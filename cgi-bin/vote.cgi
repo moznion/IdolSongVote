@@ -49,7 +49,7 @@ elsif ($request_method eq 'POST') {
         my $ltsv_file_lock = "$ltsv_file.lock";
 
         while (-d $ltsv_file_lock) {
-            select undef, undef, undef, rand(0.5);
+            select undef, undef, undef, rand(0.5); ## no critic
         }
         mkdir $ltsv_file_lock;
 
