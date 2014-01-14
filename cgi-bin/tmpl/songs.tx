@@ -1,0 +1,13 @@
+: cascade "tmpl/include/layout.tx"
+
+: override content -> {
+
+<h3>曲一覧</h3>
+
+<ul>
+: for $songs -> $song {
+  <li><a href="vote.cgi?initial_group=<: $song['initial_group'] :>&title=<: $song['title'] :>"><: $song['title'] :></a></li>
+: }
+</ul>
+
+: }
