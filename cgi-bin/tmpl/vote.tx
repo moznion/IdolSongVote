@@ -2,7 +2,7 @@
 
 : override content -> {
 
-<script src="static/js/flash_message.js"></script>
+<script src="../js/flash_message.js"></script>
 
 : if $flash_success {
 <div class='flash-success'>✓ <: $flash_success :></div>
