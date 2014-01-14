@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env carton exec -- perl
 
 use strict;
 use warnings;
