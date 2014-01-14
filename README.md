@@ -21,6 +21,8 @@ For CROSS2014 ぶつかり稽古 ;-)
 
 Pull-Request見てください．
 
+[https://github.com/moznion/IdolSongVote/pull/1](https://github.com/moznion/IdolSongVote/pull/1)
+
 # LICENSE
 
 MIT
