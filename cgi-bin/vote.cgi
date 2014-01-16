@@ -5,7 +5,6 @@ use warnings;
 use utf8;
 use CGI::Simple;
 use Encode;
-use Text::LTSV;
 use HTML::Escape qw/escape_html/;
 
 my $place_holder = '\[%IdolSongVote_CONTENT_PLACE%\]';
@@ -26,28 +25,34 @@ if ($request_method eq 'POST') {
     if (!(-d $serial_number_lock) && -f $serial_number_file) {
         mkdir $serial_number_lock;
 
-        my $ltsv_file      = "../data_files/songs/$initial_group.ltsv";
-        my $ltsv_file_lock = "$ltsv_file.lock";
+        my $tsv_file      = "../data_files/songs/$initial_group.tsv";
+        my $tsv_file_lock = "$tsv_file.lock";
 
-        while (-d $ltsv_file_lock) {
+        while (-d $tsv_file_lock) {
             select undef, undef, undef, rand(0.5); ## no critic
         }
-        mkdir $ltsv_file_lock;
+        mkdir $tsv_file_lock;
 
-        my $songs = Text::LTSV->new->parse_file($ltsv_file);
+        my $songs;
+        open my $frh, '<', $tsv_file;
+        while (chomp(my $line = <$frh>)) {
+            my @song_data = split /\t/, $line;
+            push @$songs, {
+                title  => $song_data[0],
+                polled => $song_data[1],
+            };
+        }
 
-        open my $fh, '>', $ltsv_file;
+        open my $fwh, '>', $tsv_file;
         for my $song (@$songs) {
             if ($song->{title} eq $title) {
                 $song->{polled}++;
             }
-            my $ltsv = Text::LTSV->new(%$song);
-            print $fh $ltsv->to_s . "\n";
+            print $fwh "$song->{title}\t$song->{polled}" . "\n";
         }
-        close $fh;
 
         rmdir $serial_number_lock;
-        rmdir $ltsv_file_lock;
+        rmdir $tsv_file_lock;
         unlink $serial_number_file;
 
         $status = 200;

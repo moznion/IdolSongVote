@@ -5,11 +5,10 @@ use warnings;
 use utf8;
 use Encode;
 use FindBin;
-use Text::LTSV;
 
 use constant NUM_OF_SONGS => 661;
 
-use constant GOJUON_MAP => +{
+my $gojuon_map = +{
     a     => ['あ', 'い', 'う', 'え', 'お'],
     ka    => ['か', 'き', 'く', 'け', 'こ'],
     sa    => ['さ', 'し', 'す', 'せ', 'そ'],
@@ -25,50 +24,49 @@ use constant GOJUON_MAP => +{
     '0-9' => [0 .. 9],
 };
 
+my $initial_group_map = {};
+for my $group (keys %$gojuon_map) {
+    for my $char (@{$gojuon_map->{$group}}) {
+        $initial_group_map->{$char} = $group;
+    }
+}
+
 my %songs;
 my %song_with_group;
-my $p = Text::LTSV->new;
 my $i = 0;
-for my $song (@{$p->parse_file("$FindBin::Bin/songs.ltsv")}) {
+
+open my $fh, '<', "$FindBin::Bin/songs.tsv";
+while (chomp(my $line = <$fh>)) {
     last if $i >= NUM_OF_SONGS;
 
-    my $initial = $song->{initial} or next;
-    my $title   = $song->{title} or next;
+    my @song_data = split /\t/, $line;
+    if (!$song_data[0] || !$song_data[1]) {
+        next;
+    }
+    my $title   = decode_utf8($song_data[0]);
+    my $initial = decode_utf8($song_data[1]);
 
     next if ++$songs{$title} > 1; # タイトルの重複避け
 
-    my $group = retrieve_initial_group(decode_utf8($initial));
+    my $group = $initial_group_map->{$initial};
 
     unless ($song_with_group{$group}) {
         $song_with_group{$group} = [];
     }
 
-    push $song_with_group{$group}, +{
-        title  => $title,
-        polled => 0,
-    };
+    push $song_with_group{$group}, "$title\t0";
 
     $i++;
 }
 
 my $j = 0;
 for my $group (keys %song_with_group) {
-    open my $fh_with_group, '>', "$FindBin::Bin/../../data_files/songs/$group.ltsv";
+    open my $fh_with_group, '>', "$FindBin::Bin/../../data_files/songs/$group.tsv";
 
     for my $song (@{$song_with_group{$group}}) {
-        print $fh_with_group Text::LTSV->new(%$song)->to_s . "\n";
+        print $fh_with_group encode_utf8($song) . "\n";
     }
     chmod 0707, $fh_with_group;
 
     close $fh_with_group;
-}
-
-sub retrieve_initial_group {
-    my ($initial) = @_;
-
-    for my $group (keys %{+GOJUON_MAP}) {
-        for my $elem (@{GOJUON_MAP->{$group}}) {
-            return $group if $initial eq $elem;
-        }
-    }
 }

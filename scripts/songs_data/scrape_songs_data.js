@@ -23,7 +23,7 @@ page.open(url, function (status) {
                         firstCharacter = songTitle.charAt(0).toUpperCase();
                     }
 
-                    songsListStr += 'title:' + songTitle + "\tinitial:" + firstCharacter + "\n";
+                    songsListStr += songTitle + "\t" + firstCharacter + "\n";
 
                     if (i > 15) {
                         return false;
