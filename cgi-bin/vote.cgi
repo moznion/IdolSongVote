@@ -28,7 +28,7 @@ if ($request_method eq 'GET') {
 
     print "Set-Cookie: $flash_error_cookie\n";
     print "Set-Cookie: $flash_success_cookie\n";
-    print "Content-type: text/html \n\n";
+    print "Content-Type: text/html; charset=UTF-8 \n\n";
     print encode_utf8(Text::Xslate->new->render("tmpl/vote.tx", {
         song          => $song,
         initial_group => $initial_group,
