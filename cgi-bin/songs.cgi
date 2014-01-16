@@ -10,7 +10,8 @@ use Text::Xslate;
 
 my $cgi = CGI::Simple->new;
 
-print "Content-Type: text/html; charset=UTF-8 \n\n";
+my $nc = $cgi->crlf();
+print "Content-Type: text/html; charset=UTF-8 $nc$nc";
 
 if (my $initial_group = $cgi->param('initial_group')) {
     my @songs;
