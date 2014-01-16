@@ -16,20 +16,14 @@ my $cgi = CGI::Simple->new;
 
 my $title         = $cgi->param('title');
 my $initial_group = $cgi->param('initial_group');
+my $res_status    = $cgi->param('status');
 
 my $request_method = $cgi->request_method();
 if ($request_method eq 'GET') {
     my $songs  = Text::LTSV->new->parse_file("../data_files/songs/$initial_group.ltsv");
     my ($song) = grep { $_->{title} eq $title } @$songs;
 
-    my $flash_error   = $cgi->cookie('flash_error');
-    my $flash_success = $cgi->cookie('flash_success');
-    my $flash_error_cookie   = set_flash_error_cookie('');
-    my $flash_success_cookie = set_flash_success_cookie('');
-
     my $nc = $cgi->crlf();
-    print "Set-Cookie: $flash_error_cookie\n";
-    print "Set-Cookie: $flash_success_cookie\n";
     print "Content-Type: text/html; charset=UTF-8 $nc$nc";
 
     open my $fh, '<', '../tmpl/base.html';
@@ -37,9 +31,14 @@ if ($request_method eq 'GET') {
     while (my $line = <$fh>) {
         $html .= $line;
     }
-    my $content = <<'...';
-<script src="../js/flash_message.js"></script>
-...
+    my $content = '<script src="../js/flash_message.js"></script>';
+
+    if ($res_status == 200) {
+        $content .= '<div class="flash-success">✓ 投票しました</div>'
+    }
+    elsif ($res_status == 400) {
+        $content .= '<div class="flash-error">✗ 不正なシリアルナンバーです</div>'
+    }
 
     my $escaped_song_title = escape_html(decode_utf8($song->{title}));
     $content .= "<h3>投票する曲: $escaped_song_title</h3>";
@@ -66,6 +65,7 @@ elsif ($request_method eq 'POST') {
     my $serial_number_file = "../data_files/serial_numbers/$serial_number_dir/$serial_number";
     my $serial_number_lock = "$serial_number.lock";
 
+    my $status;
     if (!(-d $serial_number_lock) && -f $serial_number_file) {
         mkdir $serial_number_lock;
 
@@ -93,39 +93,11 @@ elsif ($request_method eq 'POST') {
         rmdir $ltsv_file_lock;
         unlink $serial_number_file;
 
-        my $cookie = set_flash_success_cookie('投票しました');
-        print "Set-Cookie: $cookie\n";
+        $status = 200;
     }
     else {
         # invalid serial
-        my $cookie = set_flash_error_cookie('不正なシリアルナンバーです');
-        print "Set-Cookie: $cookie\n";
+        $status = 400;
     }
-    print $cgi->redirect("vote.cgi?initial_group=$initial_group&title=$title");
-}
-
-sub set_flash_error_cookie {
-    my ($error_message) = @_;
-
-    my $message = $error_message ? encode_utf8($error_message)
-                                 : '';
-    CGI::Simple::Cookie->new(
-        -name    => 'flash_error',
-        -values  => $message,
-        -domain  => DOMAIN,
-        -path    => '/cgi-bin/vote.cgi',
-    );
-}
-
-sub set_flash_success_cookie {
-    my ($success_message) = @_;
-
-    my $message = $success_message ? encode_utf8($success_message)
-                                   : '';
-    CGI::Simple::Cookie->new(
-        -name    => 'flash_success',
-        -values  => $message,
-        -domain  => DOMAIN,
-        -path    => '/cgi-bin/vote.cgi',
-    );
+    print $cgi->redirect("vote.cgi?initial_group=$initial_group&title=$title&status=$status");
 }
