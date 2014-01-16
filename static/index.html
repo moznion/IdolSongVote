@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>'IdolSongVote'</title>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <script src="../js/jquery-2.0.3.min.js"></script>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link href="../css/main.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="../js/main.js"></script>
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">IdolSongVote</a>
+                <ul class="nav navbar-nav">
+                    <li><a href="index.cgi">HOME</a></li>
+                </ul>
+            </div><!-- /.navbar-inner -->
+        </div><!-- /.container -->
+    </div><!-- /.navbar -->
+    <div class="container">
+        <div id="main">
+          <h3>曲の先頭の文字から探す</h3>
+          <p>
+            先頭の文字が
+            <select id="first_char">
+              <option value="a" selected>あ行</option>
+              <option value="ka">か行</option>
+              <option value="sa">さ行</option>
+              <option value="ta">た行</option>
+              <option value="na">な行</option>
+              <option value="ha">は行</option>
+              <option value="ma">ま行</option>
+              <option value="ya">や行</option>
+              <option value="ra">ら行</option>
+              <option value="wa">わ行</option>
+              <option value="a-m">A-M</option>
+              <option value="n-z">N-Z</option>
+              <option value="0-9">0-9</option>
+            </select>
+            <button id="search_first_char" class="btn btn-default">検索</button>
+          </p>
+
+          <h3>曲を検索する</h3>
+          <form action="../cgi-bin/songs.cgi" method="get">
+            <p>
+              曲名: <input type="text" name="q" size="40">
+              <input type="submit" class="btn" value="検索">
+            </p>
+          </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+      $("#search_first_char").click(function(){
+        location.href = "../cgi-bin/songs.cgi?initial_group=" + $("#first_char").val();
+      });
+    </script>
+</body>
+</html>
