@@ -4,9 +4,7 @@ use strict;
 use warnings;
 use utf8;
 use CGI::Simple;
-use HTML::Escape qw/escape_html/;
 
-my $place_holder = '\[%IdolSongVote_CONTENT_PLACE%\]';
 my $cgi = CGI::Simple->new;
 
 my $title         = $cgi->param('title');
