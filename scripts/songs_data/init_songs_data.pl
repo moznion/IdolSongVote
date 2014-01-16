@@ -52,23 +52,16 @@ for my $song (@{$p->parse_file("$FindBin::Bin/songs.ltsv")}) {
 }
 
 my $j = 0;
-open my $fh_all, '>', "$FindBin::Bin/../../data_files/songs/all.ltsv";
 for my $group (keys %song_with_group) {
     open my $fh_with_group, '>', "$FindBin::Bin/../../data_files/songs/$group.ltsv";
 
     for my $song (@{$song_with_group{$group}}) {
         print $fh_with_group Text::LTSV->new(%$song)->to_s . "\n";
-        print $fh_all Text::LTSV->new(
-            title => $song->{title},
-            initial_group => $group,
-        )->to_s . "\n";
     }
     chmod 0707, $fh_with_group;
 
     close $fh_with_group;
 }
-chmod 0707, $fh_all;
-close $fh_all;
 
 sub retrieve_initial_group {
     my ($initial) = @_;
