@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use utf8;
 use CGI::Simple;
-use Encode;
 use HTML::Escape qw/escape_html/;
 
 my $place_holder = '\[%IdolSongVote_CONTENT_PLACE%\]';

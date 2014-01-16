@@ -26,7 +26,7 @@ my $content = <<'...';
 <ul>
 ...
 
-my $initial_group = $cgi->param('initial_group');
+my $initial_group = decode_utf8($cgi->param('initial_group'));
 my @songs;
 
 {
@@ -35,7 +35,7 @@ my @songs;
         my @song_data = split /\t/, $line;
         push @songs, {
             title         => decode_utf8($song_data[0]),
-            initial_group => decode_utf8($initial_group),
+            initial_group => $initial_group,
         };
 
     }

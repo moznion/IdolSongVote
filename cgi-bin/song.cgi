@@ -10,9 +10,9 @@ use HTML::Escape qw/escape_html/;
 my $place_holder = '\[%IdolSongVote_CONTENT_PLACE%\]';
 my $cgi = CGI::Simple->new;
 
-my $title         = $cgi->param('title');
-my $initial_group = $cgi->param('initial_group');
-my $res_status    = $cgi->param('status');
+my $title         = decode_utf8($cgi->param('title'));
+my $initial_group = decode_utf8($cgi->param('initial_group'));
+my $res_status    = decode_utf8($cgi->param('status'));
 
 my $request_method = $cgi->request_method();
 
@@ -20,7 +20,7 @@ my $song;
 {
     open my $fh, '<', "../data_files/songs/$initial_group.tsv";
     while (chomp(my $line = <$fh>)) {
-        my @song_data = split /\t/, $line;
+        my @song_data = map {decode_utf8($_)} split /\t/, $line;
         if ($song_data[0] eq $title) {
             $song = \@song_data;
             last;
@@ -49,7 +49,7 @@ if ($res_status) {
     }
 }
 
-my $escaped_song_title = escape_html(decode_utf8($song->[0]));
+my $escaped_song_title = escape_html($song->[0]);
 $content .= "<h3>投票する曲: $escaped_song_title</h3>";
 $content .= '<h3>投票数: ' . escape_html($song->[1]) . '</h3>';
 $content .= <<'...';
