@@ -24,24 +24,16 @@ my $content = <<'...';
 <ul>
 ...
 
-if (my $initial_group = $cgi->param('initial_group')) {
-    my @songs;
-    for my $song (@{Text::LTSV->new->parse_file("../data_files/songs/$initial_group.ltsv")}) {
-        push @songs, {
-            title         => decode_utf8($song->{title}),
-            initial_group => decode_utf8($initial_group),
-        };
-    }
-
-    $content .= construct_songs_li(\@songs);
-}
-elsif (my $search_query = $cgi->param('q')) {
-    my $songs = Text::LTSV->new->parse_file("../data_files/songs/all.ltsv");
-    my @filtered_songs = grep {$_->{title} =~ /$search_query/i} @$songs;
-
-    $content .= construct_songs_li(\@filtered_songs)
+my $initial_group = $cgi->param('initial_group');
+my @songs;
+for my $song (@{Text::LTSV->new->parse_file("../data_files/songs/$initial_group.ltsv")}) {
+    push @songs, {
+        title         => decode_utf8($song->{title}),
+        initial_group => decode_utf8($initial_group),
+    };
 }
 
+$content .= construct_songs_li(\@songs);
 $content .= '</ul>';
 $html =~ s/$place_holder/$content/;
 
