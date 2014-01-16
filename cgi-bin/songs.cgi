@@ -46,7 +46,7 @@ sub construct_songs_li {
     for my $song (@$songs) {
         my $initial_group = escape_html($song->{initial_group});
         my $title = escape_html($song->{title});
-        $list .= qq{<li><a href="vote.cgi?initial_group=$initial_group&title=$title">$title</a></li>};
+        $list .= qq{<li><a href="song.cgi?initial_group=$initial_group&title=$title">$title</a></li>};
     }
     return $list;
 }
