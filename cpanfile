@@ -6,4 +6,4 @@ requires 'Crypt::Blowfish',    '2.14';
 requires 'Encode',             '2.57';
 requires 'Plack',              '1.0030';
 requires 'Text::LTSV',         '0.07';
-requires 'Text::Xslate',       '3.1.0';
+requires 'HTML::Escape',       '1.08';

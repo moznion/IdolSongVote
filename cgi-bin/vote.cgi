@@ -7,10 +7,11 @@ use CGI::Simple;
 use CGI::Simple::Cookie;
 use Encode;
 use Text::LTSV;
-use Text::Xslate;
+use HTML::Escape qw/escape_html/;
 
 use constant DOMAIN => '';
 
+my $place_holder = '\[%IdolSongVote_CONTENT_PLACE%\]';
 my $cgi = CGI::Simple->new;
 
 my $title         = $cgi->param('title');
@@ -30,12 +31,34 @@ if ($request_method eq 'GET') {
     print "Set-Cookie: $flash_error_cookie\n";
     print "Set-Cookie: $flash_success_cookie\n";
     print "Content-Type: text/html; charset=UTF-8 $nc$nc";
-    print encode_utf8(Text::Xslate->new->render("tmpl/vote.tx", {
-        song          => $song,
-        initial_group => $initial_group,
-        flash_error   => $flash_error,
-        flash_success => $flash_success,
-    }));
+
+    open my $fh, '<', '../tmpl/base.html';
+    my $html = '';
+    while (my $line = <$fh>) {
+        $html .= $line;
+    }
+    my $content = <<'...';
+<script src="../js/flash_message.js"></script>
+...
+
+    my $escaped_song_title = escape_html(decode_utf8($song->{title}));
+    $content .= "<h3>投票する曲: $escaped_song_title</h3>";
+    $content .= '<h3>投票数: ' . escape_html($song->{polled}) . '</h3>';
+    $content .= <<'...';
+<br />
+<form action="vote.cgi" method="post">
+  <p>
+    シリアルナンバー: <input type="text" name="serial_number" size="40">
+    <input type="submit" class="btn" value="この曲に投票する！">
+  </p>
+...
+    my $escaped_initial_group = escape_html($initial_group);
+    $content .= qq{<input type="hidden" name="initial_group" value="$escaped_initial_group">};
+    $content .= qq{<input type="hidden" name="title" value="$escaped_song_title">};
+    $content .= '</form>';
+    $html =~ s/$place_holder/$content/;
+
+    print $html;
 }
 elsif ($request_method eq 'POST') {
     my $serial_number      = $cgi->param('serial_number');
