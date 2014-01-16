@@ -44,6 +44,12 @@ DISTRIBUTIONS
     requirements:
       IO::Scalar 0
       Test::More 0
+  Class-Accessor-Lite-0.05
+    pathname: K/KA/KAZUHO/Class-Accessor-Lite-0.05.tar.gz
+    provides:
+      Class::Accessor::Lite 0.05
+    requirements:
+      ExtUtils::MakeMaker 6.42
   Class-Inspector-1.28
     pathname: A/AD/ADAMK/Class-Inspector-1.28.tar.gz
     provides:
@@ -54,6 +60,20 @@ DISTRIBUTIONS
       File::Spec 0.80
       Test::More 0.47
       perl 5.006
+  Class-Method-Modifiers-2.09
+    pathname: E/ET/ETHER/Class-Method-Modifiers-2.09.tar.gz
+    provides:
+      Class::Method::Modifiers 2.09
+    requirements:
+      B 0
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
+      base 0
+      perl 5.006
+      strict 0
+      warnings 0
   Crypt-Blowfish-2.14
     pathname: D/DP/DPARIS/Crypt-Blowfish-2.14.tar.gz
     provides:
@@ -74,6 +94,17 @@ DISTRIBUTIONS
       Test::Requires 0
       XSLoader 0.02
       perl 5.008001
+  Data-OptList-0.109
+    pathname: R/RJ/RJBS/Data-OptList-0.109.tar.gz
+    provides:
+      Data::OptList 0.109
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      List::Util 0
+      Params::Util 0
+      Sub::Install 0.921
+      strict 0
+      warnings 0
   Devel-CheckCompiler-0.05
     pathname: S/SY/SYOHEX/Devel-CheckCompiler-0.05.tar.gz
     provides:
@@ -160,6 +191,49 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test 0
       perl 5.008
+  ExtUtils-Config-0.007
+    pathname: L/LE/LEONT/ExtUtils-Config-0.007.tar.gz
+    provides:
+      ExtUtils::Config 0.007
+    requirements:
+      Config 0
+      Data::Dumper 0
+      ExtUtils::MakeMaker 6.30
+      File::Find 0
+      File::Temp 0
+      Test::More 0.88
+      strict 0
+      warnings 0
+  ExtUtils-Helpers-0.021
+    pathname: L/LE/LEONT/ExtUtils-Helpers-0.021.tar.gz
+    provides:
+      ExtUtils::Helpers 0.021
+      ExtUtils::Helpers::Unix 0.021
+      ExtUtils::Helpers::VMS 0.021
+      ExtUtils::Helpers::Windows 0.021
+    requirements:
+      Carp 0
+      Config 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.30
+      File::Basename 0
+      File::Copy 0
+      File::Spec::Functions 0
+      Module::Load 0
+      Text::ParseWords 3.24
+      strict 0
+      warnings 0
+  ExtUtils-InstallPaths-0.010
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.010.tar.gz
+    provides:
+      ExtUtils::InstallPaths 0.010
+    requirements:
+      Carp 0
+      ExtUtils::Config 0.002
+      ExtUtils::MakeMaker 6.30
+      File::Spec 0
+      strict 0
+      warnings 0
   ExtUtils-ParseXS-3.22
     pathname: S/SM/SMUELLER/ExtUtils-ParseXS-3.22.tar.gz
     provides:
@@ -252,6 +326,24 @@ DISTRIBUTIONS
       Symbol 0
       Test::More 0
       strict 0
+  HTML-Escape-1.08
+    pathname: T/TO/TOKUHIROM/HTML-Escape-1.08.tar.gz
+    provides:
+      HTML::Escape 1.08
+      HTML::Escape::PurePerl undef
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Devel::PPPort 3.20
+      Exporter 0
+      ExtUtils::CBuilder 0
+      Module::Build 0.38
+      Module::Build::Pluggable::PPPort 0.04
+      Test::More 0.98
+      Test::Requires 0
+      XSLoader 0
+      parent 0
+      perl 5.008008
   HTTP-Body-1.19
     pathname: G/GE/GETTY/HTTP-Body-1.19.tar.gz
     provides:
@@ -421,6 +513,67 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
+  Module-Build-Pluggable-0.10
+    pathname: T/TO/TOKUHIROM/Module-Build-Pluggable-0.10.tar.gz
+    provides:
+      Module::Build::Pluggable 0.10
+      Module::Build::Pluggable::Base undef
+      Module::Build::Pluggable::GithubMeta undef
+      Module::Build::Pluggable::Repository 0.10
+      Module::Build::Pluggable::Util undef
+      Test::Module::Build::Pluggable undef
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Class::Accessor::Lite 0
+      Class::Method::Modifiers 0
+      Data::OptList 0
+      File::Basename 0
+      File::Path 0
+      File::Temp 0
+      Module::Build 0.38
+      Module::Load 0
+      Test::SharedFork 0
+      parent 0
+      perl 5.008001
+  Module-Build-Pluggable-PPPort-0.04
+    pathname: T/TO/TOKUHIROM/Module-Build-Pluggable-PPPort-0.04.tar.gz
+    provides:
+      Module::Build::Pluggable::PPPort 0.04
+    requirements:
+      Class::Accessor::Lite 0
+      Devel::PPPort 3.19
+      Module::Build 0.38
+      Module::Build::Pluggable 0.03
+      Test::More 0.98
+      Test::Requires 0
+      parent 0
+      perl 5.008001
+  Module-Build-Tiny-0.030
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+    provides:
+      Module::Build::Tiny 0.030
+    requirements:
+      CPAN::Meta 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::Install 0
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::ParseXS 0
+      File::Basename 0
+      File::Find 0
+      File::Path 0
+      File::Spec::Functions 0
+      Getopt::Long 0
+      JSON::PP 2
+      Pod::Man 0
+      TAP::Harness 3.29
+      TAP::Harness::Env 0
+      perl 5.006
+      strict 0
+      warnings 0
   Module-Build-XSUtil-0.06
     pathname: H/HI/HIDEAKIO/Module-Build-XSUtil-0.06.tar.gz
     provides:
@@ -479,6 +632,17 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl v5.8.1
+  Params-Util-1.07
+    pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
+    provides:
+      Params::Util 1.07
+    requirements:
+      ExtUtils::CBuilder 0.27
+      ExtUtils::MakeMaker 6.52
+      File::Spec 0.80
+      Scalar::Util 1.18
+      Test::More 0.42
+      perl 5.00503
   Plack-1.0030
     pathname: M/MI/MIYAGAWA/Plack-1.0030.tar.gz
     provides:
@@ -592,6 +756,70 @@ DISTRIBUTIONS
       Stream::Buffered::PerlIO undef
     requirements:
       ExtUtils::MakeMaker 6.36
+  Sub-Install-0.927
+    pathname: R/RJ/RJBS/Sub-Install-0.927.tar.gz
+    provides:
+      Sub::Install 0.927
+    requirements:
+      B 0
+      Carp 0
+      ExtUtils::MakeMaker 6.30
+      Scalar::Util 0
+      strict 0
+      warnings 0
+  Test-Harness-3.30
+    pathname: L/LE/LEONT/Test-Harness-3.30.tar.gz
+    provides:
+      App::Prove 3.30
+      App::Prove::State 3.30
+      App::Prove::State::Result 3.30
+      App::Prove::State::Result::Test 3.30
+      TAP::Base 3.30
+      TAP::Formatter::Base 3.30
+      TAP::Formatter::Color 3.30
+      TAP::Formatter::Console 3.30
+      TAP::Formatter::Console::ParallelSession 3.30
+      TAP::Formatter::Console::Session 3.30
+      TAP::Formatter::File 3.30
+      TAP::Formatter::File::Session 3.30
+      TAP::Formatter::Session 3.30
+      TAP::Harness 3.30
+      TAP::Harness::Env 3.30
+      TAP::Object 3.30
+      TAP::Parser 3.30
+      TAP::Parser::Aggregator 3.30
+      TAP::Parser::Grammar 3.30
+      TAP::Parser::Iterator 3.30
+      TAP::Parser::Iterator::Array 3.30
+      TAP::Parser::Iterator::Process 3.30
+      TAP::Parser::Iterator::Stream 3.30
+      TAP::Parser::IteratorFactory 3.30
+      TAP::Parser::Multiplexer 3.30
+      TAP::Parser::Result 3.30
+      TAP::Parser::Result::Bailout 3.30
+      TAP::Parser::Result::Comment 3.30
+      TAP::Parser::Result::Plan 3.30
+      TAP::Parser::Result::Pragma 3.30
+      TAP::Parser::Result::Test 3.30
+      TAP::Parser::Result::Unknown 3.30
+      TAP::Parser::Result::Version 3.30
+      TAP::Parser::Result::YAML 3.30
+      TAP::Parser::ResultFactory 3.30
+      TAP::Parser::Scheduler 3.30
+      TAP::Parser::Scheduler::Job 3.30
+      TAP::Parser::Scheduler::Spinner 3.30
+      TAP::Parser::Source 3.30
+      TAP::Parser::SourceHandler 3.30
+      TAP::Parser::SourceHandler::Executable 3.30
+      TAP::Parser::SourceHandler::File 3.30
+      TAP::Parser::SourceHandler::Handle 3.30
+      TAP::Parser::SourceHandler::Perl 3.30
+      TAP::Parser::SourceHandler::RawTAP 3.30
+      TAP::Parser::YAMLish::Reader 3.30
+      TAP::Parser::YAMLish::Writer 3.30
+      Test::Harness 3.30
+    requirements:
+      ExtUtils::MakeMaker 0
   Test-NoWarnings-1.04
     pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
     provides:
