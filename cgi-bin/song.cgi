@@ -4,16 +4,16 @@ use strict;
 use warnings;
 use utf8;
 use lib "lib";
-use CGI::Simple;
 use Encode;
 use HTML::Escape qw/escape_html/;
 use IdolSongVote::Util;
+use IdolSongVote::CGI::Simple;
 
-my $cgi = CGI::Simple->new;
+my $cgi = IdolSongVote::CGI::Simple->new;
 
-my $title         = decode_utf8($cgi->param('title'));
-my $initial_group = decode_utf8($cgi->param('initial_group'));
-my $res_status    = decode_utf8($cgi->param('status'));
+my $title         = $cgi->param('title');
+my $initial_group = $cgi->param('initial_group');
+my $res_status    = $cgi->param('status');
 
 my $crlf = $cgi->crlf();
 print "Content-Type: text/html; charset=UTF-8 $crlf$crlf";

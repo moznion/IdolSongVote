@@ -3,13 +3,14 @@
 use strict;
 use warnings;
 use utf8;
-use CGI::Simple;
+use lib "lib";
 use Encode;
+use IdolSongVote::CGI::Simple;
 
-my $cgi = CGI::Simple->new;
+my $cgi = IdolSongVote::CGI::Simple->new;
 
-my $title         = decode_utf8($cgi->param('title'));
-my $initial_group = decode_utf8($cgi->param('initial_group'));
+my $title         = $cgi->param('title');
+my $initial_group = $cgi->param('initial_group');
 
 my $request_method = $cgi->request_method();
 if ($request_method eq 'POST') {
