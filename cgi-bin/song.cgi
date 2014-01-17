@@ -31,7 +31,8 @@ if ($res_status) {
 
 my $song;
 open my $fh, '<', "../data_files/songs/$initial_group.tsv";
-while (chomp(my $line = <$fh>)) {
+while (my $line = <$fh>) {
+    chomp($line);
     my @song_data = map {decode_utf8($_)} split /\t/, $line;
     if ($song_data[0] eq $title) {
         $song = \@song_data;

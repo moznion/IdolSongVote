@@ -21,7 +21,8 @@ my $content = <<'...';
 ...
 
 open my $fh, '<', "../data_files/songs/$initial_group.tsv";
-while (chomp(my $line = <$fh>)) {
+while (my $line = <$fh>) {
+    chomp($line);
     my @song_data = split /\t/, $line;
 
     my $initial_group = escape_html($initial_group);

@@ -17,7 +17,8 @@ close $fh;
 
 my $polled_data = {};
 open my $frh, '<', $log_to_sum_up;
-while (chomp(my $line = <$frh>)) {
+while (my $line = <$frh>) {
+    chomp($line);
     my @polled = split /\t/, $line;
     my $title = decode_utf8($polled[0]);
     my $initial_group = decode_utf8($polled[1]);
@@ -38,7 +39,8 @@ for my $group (keys %$polled_data) {
 
     open my $frh, '<', $song_file_stash;
     open my $fwh, '>', $song_file;
-    while (chomp(my $line = <$frh>)) {
+    while (my $line = <$frh>) {
+        chomp($line);
         my @song_data = split /\t/, $line;
         my $title  = decode_utf8($song_data[0]);
         my $polled = decode_utf8($song_data[1]);

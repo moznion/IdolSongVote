@@ -36,7 +36,8 @@ my %song_with_group;
 my $i = 0;
 
 open my $fh, '<', "$FindBin::Bin/songs.tsv";
-while (chomp(my $line = <$fh>)) {
+while (my $line = <$fh>) {
+    chomp($line);
     last if $i >= NUM_OF_SONGS;
 
     my @song_data = split /\t/, $line;
