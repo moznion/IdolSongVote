@@ -8,15 +8,15 @@ use Encode;
 
 my $songs_data_dir  = "$FindBin::Bin/../data_files/songs";
 my $polled_log_file = "$songs_data_dir/polled.log";
-open my $fh, '>>', $polled_log_file;
-flock $fh, 2;
+open my $fh, '>>', $polled_log_file or die "Can't open polled log file to append: $!";
+flock $fh, 2 or die "Can't lock to write polled log file: $!";
 
 my $log_to_sum_up = $polled_log_file . ".bak";
 rename $polled_log_file, $log_to_sum_up;
 close $fh;
 
 my $polled_data = {};
-open my $frh, '<', $log_to_sum_up;
+open my $frh, '<', $log_to_sum_up or die "Can't open polled log file to read: $!";
 while (my $line = <$frh>) {
     chomp($line);
     my @polled = split /\t/, $line;
@@ -37,8 +37,8 @@ for my $group (keys %$polled_data) {
     my $song_file_stash = "$song_file.bak";
     rename $song_file, $song_file_stash;
 
-    open my $frh, '<', $song_file_stash;
-    open my $fwh, '>', $song_file;
+    open my $frh, '<', $song_file_stash or die "Can't open song file to read: $!";
+    open my $fwh, '>', $song_file or die "Can't open song file to write: $!";
     while (my $line = <$frh>) {
         chomp($line);
         my @song_data = split /\t/, $line;

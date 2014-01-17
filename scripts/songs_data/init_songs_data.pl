@@ -35,7 +35,7 @@ my %songs;
 my %song_with_group;
 my $i = 0;
 
-open my $fh, '<', "$FindBin::Bin/songs.tsv";
+open my $fh, '<', "$FindBin::Bin/songs.tsv" or die "Can't open songs tsv file to read: $!";
 while (my $line = <$fh>) {
     chomp($line);
     last if $i >= NUM_OF_SONGS;
@@ -62,7 +62,7 @@ while (my $line = <$fh>) {
 
 my $j = 0;
 for my $group (keys %song_with_group) {
-    open my $fh_with_group, '>', "$FindBin::Bin/../../data_files/songs/$group.tsv";
+    open my $fh_with_group, '>', "$FindBin::Bin/../../data_files/songs/$group.tsv" or die "Can't open songs file to write: $!";
 
     for my $song (@{$song_with_group{$group}}) {
         print $fh_with_group encode_utf8($song) . "\n";

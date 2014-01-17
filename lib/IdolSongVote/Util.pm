@@ -14,7 +14,7 @@ sub embed_content_to_base_html {
 }
 
 sub _load_base_html {
-    open my $fh, '<', "$FindBin::Bin/tmpl/base.html";
+    open my $fh, '<', "$FindBin::Bin/tmpl/base.html" or die "Can't open base html file: $!";
     do { local $/; <$fh>; }
 }
 1;

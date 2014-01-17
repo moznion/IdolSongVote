@@ -30,7 +30,7 @@ if ($res_status) {
 }
 
 my $song;
-open my $fh, '<', "../data_files/songs/$initial_group.tsv";
+open my $fh, '<', "../data_files/songs/$initial_group.tsv" or die "Can't open songs tsv file to read: $!";
 while (my $line = <$fh>) {
     chomp($line);
     my @song_data = map {decode_utf8($_)} split /\t/, $line;

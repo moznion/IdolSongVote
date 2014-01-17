@@ -20,7 +20,7 @@ my $content = <<'...';
 <ul>
 ...
 
-open my $fh, '<', "../data_files/songs/$initial_group.tsv";
+open my $fh, '<', "../data_files/songs/$initial_group.tsv" or die "Can't open songs tsv file to read: $!";
 while (my $line = <$fh>) {
     chomp($line);
     my @song_data = split /\t/, $line;
