@@ -32,8 +32,8 @@ while (my $line = <$frh>) {
 close $frh;
 unlink $log_to_sum_up;
 
-for my $group (keys %$polled_data) {
-    my $song_file = "$songs_data_dir/$group.tsv";
+for my $initial_group (keys %$polled_data) {
+    my $song_file = "$songs_data_dir/$initial_group.tsv";
     my $song_file_stash = "$song_file.bak";
     rename $song_file, $song_file_stash;
 
@@ -45,7 +45,7 @@ for my $group (keys %$polled_data) {
         my $title  = $song_data[0];
         my $polled = $song_data[1];
 
-        if (my $polled_addition = $polled_data->{$group}->{$title}) {
+        if (my $polled_addition = $polled_data->{$initial_group}->{$title}) {
             $polled += $polled_addition;
         }
 
