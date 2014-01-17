@@ -1,0 +1,1 @@
+*/10 * * * * cd /path/to/IdolSongVote/ && carton exec -- perl scripts/sum_up.pl

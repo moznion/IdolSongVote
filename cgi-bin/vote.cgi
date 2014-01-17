@@ -22,30 +22,15 @@ if ($request_method eq 'POST') {
 
     my $status;
     if (-f $serial_number_file) {
-        my $tsv_file      = "../data_files/songs/$initial_group.tsv";
-
-        my $songs;
-        open my $fh, '<', $tsv_file;
-        while (chomp(my $line = <$fh>)) {
-            my @song_data = split /\t/, $line;
-            push @$songs, {
-                title  => decode_utf8($song_data[0]),
-                polled => decode_utf8($song_data[1]),
-            };
-        }
+        my $polled_log_file = '../data_files/songs/polled.log';
 
         open my $frh, '<', $serial_number_file;
         flock $frh, 1;
-        open my $fwh, '>', $tsv_file;
+        open my $fwh, '>>', $polled_log_file;
         flock $fwh, 2;
         seek $fwh, 0, 2;
 
-        for my $song (@$songs) {
-            if ($song->{title} eq $title) {
-                $song->{polled}++;
-            }
-            print $fwh sprintf("%s\t%s\n", encode_utf8($song->{title}), encode_utf8($song->{polled}));
-        }
+        print $fwh sprintf("%s\t%s\n", encode_utf8($title), encode_utf8($initial_group));
         rename $serial_number_file, "${serial_number_file}_USED";
 
         $status = 200;
