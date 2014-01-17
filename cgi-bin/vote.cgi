@@ -14,25 +14,19 @@ my $res_status    = $cgi->param('status');
 my $request_method = $cgi->request_method();
 if ($request_method eq 'POST') {
     my $serial_number      = $cgi->param('serial_number');
-    my $serial_number_dir  = substr($serial_number, 0, 2);
-    my $serial_number_file = "../data_files/serial_numbers/$serial_number_dir/$serial_number";
-    my $serial_number_lock = "$serial_number.lock";
+    my $serial_number_file = sprintf(
+        "../data_files/serial_numbers/%s/%s",
+        substr($serial_number, 0, 2),
+        $serial_number,
+    );
 
     my $status;
-    if (!(-d $serial_number_lock) && -f $serial_number_file) {
-        mkdir $serial_number_lock;
-
+    if (-f $serial_number_file) {
         my $tsv_file      = "../data_files/songs/$initial_group.tsv";
-        my $tsv_file_lock = "$tsv_file.lock";
-
-        while (-d $tsv_file_lock) {
-            select undef, undef, undef, rand(0.5); ## no critic
-        }
-        mkdir $tsv_file_lock;
 
         my $songs;
-        open my $frh, '<', $tsv_file;
-        while (chomp(my $line = <$frh>)) {
+        open my $fh, '<', $tsv_file;
+        while (chomp(my $line = <$fh>)) {
             my @song_data = split /\t/, $line;
             push @$songs, {
                 title  => $song_data[0],
@@ -40,17 +34,19 @@ if ($request_method eq 'POST') {
             };
         }
 
+        open my $frh, '<', $serial_number_file;
+        flock $frh, 1;
         open my $fwh, '>', $tsv_file;
+        flock $fwh, 2;
+        seek $fwh, 0, 2;
+
         for my $song (@$songs) {
             if ($song->{title} eq $title) {
                 $song->{polled}++;
             }
             print $fwh "$song->{title}\t$song->{polled}" . "\n";
         }
-
-        rmdir $serial_number_lock;
-        rmdir $tsv_file_lock;
-        unlink $serial_number_file;
+        rename $serial_number_file, "${serial_number_file}_USED";
 
         $status = 200;
     }
