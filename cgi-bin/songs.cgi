@@ -12,8 +12,8 @@ use IdolSongVote::Util;
 my $cgi = CGI::Simple->new;
 my $initial_group = decode_utf8($cgi->param('initial_group'));
 
-my $nc = $cgi->crlf();
-print "Content-Type: text/html; charset=UTF-8 $nc$nc";
+my $crlf = $cgi->crlf();
+print "Content-Type: text/html; charset=UTF-8 $crlf$crlf";
 
 my $content = <<'...';
 <h3>曲一覧</h3>

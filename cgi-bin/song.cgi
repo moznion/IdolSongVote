@@ -15,8 +15,8 @@ my $title         = decode_utf8($cgi->param('title'));
 my $initial_group = decode_utf8($cgi->param('initial_group'));
 my $res_status    = decode_utf8($cgi->param('status'));
 
-my $nc = $cgi->crlf();
-print "Content-Type: text/html; charset=UTF-8 $nc$nc";
+my $crlf = $cgi->crlf();
+print "Content-Type: text/html; charset=UTF-8 $crlf$crlf";
 
 my $content = '<script src="../js/flash_message.js"></script>';
 
