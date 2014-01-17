@@ -4,12 +4,12 @@ use strict;
 use warnings;
 use utf8;
 use CGI::Simple;
+use Encode;
 
 my $cgi = CGI::Simple->new;
 
-my $title         = $cgi->param('title');
-my $initial_group = $cgi->param('initial_group');
-my $res_status    = $cgi->param('status');
+my $title         = decode_utf8($cgi->param('title'));
+my $initial_group = decode_utf8($cgi->param('initial_group'));
 
 my $request_method = $cgi->request_method();
 if ($request_method eq 'POST') {
@@ -29,8 +29,8 @@ if ($request_method eq 'POST') {
         while (chomp(my $line = <$fh>)) {
             my @song_data = split /\t/, $line;
             push @$songs, {
-                title  => $song_data[0],
-                polled => $song_data[1],
+                title  => decode_utf8($song_data[0]),
+                polled => decode_utf8($song_data[1]),
             };
         }
 
@@ -44,7 +44,7 @@ if ($request_method eq 'POST') {
             if ($song->{title} eq $title) {
                 $song->{polled}++;
             }
-            print $fwh "$song->{title}\t$song->{polled}" . "\n";
+            print $fwh sprintf("%s\t%s\n", encode_utf8($song->{title}), encode_utf8($song->{polled}));
         }
         rename $serial_number_file, "${serial_number_file}_USED";
 
@@ -54,5 +54,10 @@ if ($request_method eq 'POST') {
         # invalid serial
         $status = 400;
     }
-    print $cgi->redirect("song.cgi?initial_group=$initial_group&title=$title&status=$status");
+    print $cgi->redirect(
+        sprintf(
+            "song.cgi?initial_group=%s&title=%s&status=%s",
+            encode_utf8($initial_group), encode_utf8($title), encode_utf8($status)
+        )
+    );
 }
