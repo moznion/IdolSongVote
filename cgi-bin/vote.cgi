@@ -42,7 +42,7 @@ if ($request_method eq 'POST') {
     print $cgi->redirect(
         sprintf(
             "song.cgi?initial_group=%s&title=%s&status=%s",
-            encode_utf8($initial_group), encode_utf8($title), encode_utf8($status)
+            encode_utf8($initial_group), encode_utf8($title), $status
         )
     );
 }
