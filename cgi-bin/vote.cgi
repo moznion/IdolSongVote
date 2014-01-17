@@ -5,6 +5,7 @@ use warnings;
 use utf8;
 use lib "lib";
 use Encode;
+use Fcntl qw(:flock SEEK_END);
 use IdolSongVote::CGI::Simple;
 
 my $cgi = IdolSongVote::CGI::Simple->new;
@@ -26,10 +27,10 @@ if ($request_method eq 'POST') {
         my $polled_log_file = '../data_files/songs/polled.log';
 
         open my $frh, '<', $serial_number_file or die "Can't open serial number file to read: $!";
-        flock $frh, 1 or die "Can't lock to read serial number file: $!";
+        flock $frh, LOCK_SH or die "Can't lock to read serial number file: $!";
         open my $fwh, '>>:encoding(utf-8)', $polled_log_file or die "Can't open polled log file to append: $!";
-        flock $fwh, 2 or die "Can't lock to write polled log file: $!";
-        seek $fwh, 0, 2 or die "Can't seek to tail of polled log file: $!";
+        flock $fwh, LOCK_EX or die "Can't lock to write polled log file: $!";
+        seek $fwh, 0, SEEK_END or die "Can't seek to tail of polled log file: $!";
 
         print $fwh "$title\t$initial_group\n";
         rename $serial_number_file, "${serial_number_file}_USED";

@@ -4,11 +4,12 @@ use strict;
 use warnings;
 use utf8;
 use FindBin;
+use Fcntl qw(:flock);
 
 my $songs_data_dir  = "$FindBin::Bin/../data_files/songs";
 my $polled_log_file = "$songs_data_dir/polled.log";
 open my $fh, '>>', $polled_log_file or die "Can't open polled log file to append: $!";
-flock $fh, 2 or die "Can't lock to write polled log file: $!";
+flock $fh, LOCK_EX or die "Can't lock to write polled log file: $!";
 
 my $log_to_sum_up = $polled_log_file . ".bak";
 rename $polled_log_file, $log_to_sum_up;
