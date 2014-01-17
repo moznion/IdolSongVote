@@ -20,13 +20,13 @@ my $content = <<'...';
 <ul>
 ...
 
-open my $fh, '<', "../data_files/songs/$initial_group.tsv" or die "Can't open songs tsv file to read: $!";
+open my $fh, '<:encoding(utf-8)', "../data_files/songs/$initial_group.tsv" or die "Can't open songs tsv file to read: $!";
 while (my $line = <$fh>) {
     chomp($line);
     my @song_data = split /\t/, $line;
 
     my $initial_group = escape_html($initial_group);
-    my $title = escape_html(decode_utf8($song_data[0]));
+    my $title = escape_html($song_data[0]);
     $content .= qq{<li><a href="song.cgi?initial_group=$initial_group&title=$title">$title</a></li>};
 }
 $content .= '</ul>';

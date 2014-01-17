@@ -26,11 +26,11 @@ if ($request_method eq 'POST') {
 
         open my $frh, '<', $serial_number_file or die "Can't open serial number file to read: $!";
         flock $frh, 1 or die "Can't lock to read serial number file: $!";
-        open my $fwh, '>>', $polled_log_file or die "Can't open polled log file to append: $!";
+        open my $fwh, '>>:encoding(utf-8)', $polled_log_file or die "Can't open polled log file to append: $!";
         flock $fwh, 2 or die "Can't lock to write polled log file: $!";
         seek $fwh, 0, 2 or die "Can't seek to tail of polled log file: $!";
 
-        print $fwh sprintf("%s\t%s\n", encode_utf8($title), encode_utf8($initial_group));
+        print $fwh "$title\t$initial_group\n";
         rename $serial_number_file, "${serial_number_file}_USED";
 
         $status = 200;
